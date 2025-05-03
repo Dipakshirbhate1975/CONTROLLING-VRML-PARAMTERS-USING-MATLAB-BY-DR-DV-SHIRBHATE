@@ -1,0 +1,488 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>gui1</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-02-18"><meta name="DC.source" content="gui1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> gui1()
+</pre><pre class="codeinput"><span class="keyword">global</span> tv1 ;
+tv1 = 0 ;
+
+<span class="keyword">global</span> flg_light ;
+flg_light = 0 ;
+
+<span class="keyword">global</span> flg_hlight ;
+flg_hlight = 0 ;
+
+hFig = figure(<span class="string">'Toolbar'</span>,<span class="string">'none'</span>,<span class="string">'Menubar'</span>, <span class="string">'none'</span>,<span class="keyword">...</span>
+    <span class="string">'Name'</span>,<span class="string">'gui1'</span>,<span class="string">'Resize'</span>,<span class="string">'off'</span>,<span class="string">'CloseRequestFcn'</span>,{@my_closereq},<span class="keyword">...</span>
+    <span class="string">'Position'</span>,[800 400 400 300],<span class="string">'Color'</span>,[0.6 0.6 0.6]);
+
+s1 = uicontrol(<span class="string">'Style'</span>,<span class="string">'slider'</span>,<span class="string">'Callback'</span>, {@s1_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+                <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.8 0.5 .08],<span class="string">'Max'</span>,15,<span class="keyword">...</span>
+                <span class="string">'Min'</span>,0,<span class="string">'SliderStep'</span>,[0.01 0.10]);
+
+sv1 = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'edit'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">''</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.6 0.8 0.2 .09],<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>);
+
+sv1l = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'text'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">'speed w1'</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.8 0.8 0.2 .09]);
+
+s2 = uicontrol(<span class="string">'Style'</span>,<span class="string">'slider'</span>,<span class="string">'Callback'</span>, {@s2_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+                <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.7 0.5 .08],<span class="string">'Max'</span>,15,<span class="keyword">...</span>
+                <span class="string">'Min'</span>,0,<span class="string">'SliderStep'</span>,[0.01 0.10]);
+
+sv2 = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'edit'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">''</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.6 0.7 0.2 .09],<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>);
+
+sv2l = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'text'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">'speed w2'</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.8 0.7 0.2 .09]);
+
+s3 = uicontrol(<span class="string">'Style'</span>,<span class="string">'slider'</span>,<span class="string">'Callback'</span>, {@s3_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+                <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.6 0.5 .08],<span class="string">'Max'</span>,10,<span class="keyword">...</span>
+                <span class="string">'Min'</span>,0,<span class="string">'SliderStep'</span>,[0.01 0.10]);
+
+sv3 = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'edit'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">''</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.6 0.6 0.2 .09],<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>);
+
+sv3l = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'text'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">''</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.8 0.6 0.2 .09]);
+
+s4 = uicontrol(<span class="string">'Style'</span>,<span class="string">'slider'</span>,<span class="string">'Callback'</span>, {@s4_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+                <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.5 0.5 .08],<span class="string">'Max'</span>,1,<span class="keyword">...</span>
+                <span class="string">'Min'</span>,0,<span class="string">'SliderStep'</span>,[0.01 0.10]);
+
+sv4 = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'edit'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">''</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.6 0.5 0.2 .09],<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>);
+
+sv4l = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'text'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">'transp-cy'</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.8 0.5 0.2 .09]);
+
+s5 = uicontrol(<span class="string">'Style'</span>,<span class="string">'slider'</span>,<span class="string">'Callback'</span>, {@s5_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+                <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.4 0.5 .08],<span class="string">'Max'</span>,10,<span class="keyword">...</span>
+                <span class="string">'Min'</span>,0,<span class="string">'SliderStep'</span>,[0.01 0.10]);
+
+sv5 = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'edit'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">''</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.6 0.4 0.2 .09],<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>);
+
+sv5l = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'text'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">'light int'</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.8 0.4 0.2 .09]);
+
+
+s6 = uicontrol(<span class="string">'Style'</span>,<span class="string">'slider'</span>,<span class="string">'Callback'</span>, {@s6_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+                <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.3 0.5 .08],<span class="string">'Max'</span>,10,<span class="keyword">...</span>
+                <span class="string">'Min'</span>,0,<span class="string">'SliderStep'</span>,[0.01 0.10]);
+
+sv6 = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'edit'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">''</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.6 0.3 0.2 .09],<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>);
+
+sv6l = uicontrol(gcf,<span class="string">'Style'</span>,<span class="string">'text'</span>,<span class="string">'FontSize'</span>,12,<span class="string">'String'</span>,<span class="string">'sun int'</span>,<span class="keyword">...</span>
+        <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.8 0.3 0.2 .09]);
+
+start_wrl = uicontrol(<span class="string">'String'</span>,<span class="string">'start'</span>,<span class="string">'Callback'</span>, {@start_wrl_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+            <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.18 0.15 .1]);
+
+stop_wrl = uicontrol(<span class="string">'String'</span>,<span class="string">'stop'</span>,<span class="string">'Callback'</span>, {@stop_wrl_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+            <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.1 0.06 0.15 .1]);
+
+light_wrl = uicontrol(<span class="string">'String'</span>,<span class="string">'light'</span>,<span class="string">'Callback'</span>, {@light_wrl_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+            <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.3 0.18 0.15 .1]);
+
+hlight_wrl = uicontrol(<span class="string">'String'</span>,<span class="string">'hlight'</span>,<span class="string">'Callback'</span>, {@hlight_wrl_callback},<span class="string">'FontSize'</span>,14,<span class="keyword">...</span>
+            <span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[0.3 0.06 0.15 .1]);
+
+t = timer(<span class="string">'period'</span>,0.02);
+set(t,<span class="string">'ExecutionMode'</span>,<span class="string">'fixedrate'</span>,<span class="string">'StartDelay'</span>,0.5);
+set(t,<span class="string">'timerfcn'</span>,@mytimer_callback);
+<span class="comment">% start(t);</span>
+
+myw = vrworld(<span class="string">'HELICAL GEAR .wrl'</span>);
+open(myw)
+f = vrfigure(myw);
+
+tg41 = vrnode(myw,<span class="string">'group04-TIMER'</span>);
+tg51 = vrnode(myw,<span class="string">'group05-TIMER'</span>);
+
+light1 = vrnode(myw,<span class="string">'Light'</span>);
+sun1   = vrnode(myw,<span class="string">'sun'</span>);
+
+axis <span class="string">off</span>;
+
+<span class="comment">% [X&gt; B^ W H]</span>
+<span class="keyword">function</span> s1_callback(hObject,eventdata)
+
+ T1=get(s1,<span class="string">'value'</span>);
+ set(sv1,<span class="string">'string'</span>,15-T1)
+ tg51.cycleInterval = T1;
+
+
+<span class="keyword">end</span>
+<span class="keyword">function</span> s2_callback(hObject,eventdata)
+
+ T1=get(s2,<span class="string">'value'</span>);
+ set(sv2,<span class="string">'string'</span>,15-T1)
+ tg41.cycleInterval = T1;
+<span class="comment">%  myw = vrworld('HELICAL GEAR .wrl');</span>
+<span class="comment">%  open(myw)</span>
+<span class="comment">%  view(myw)</span>
+
+
+<span class="keyword">end</span>
+<span class="keyword">function</span> s3_callback(hObject,eventdata)
+
+ T1=get(s3,<span class="string">'value'</span>);
+ set(sv3,<span class="string">'string'</span>,T1)
+<span class="comment">%  myw = vrworld('HELICAL GEAR .wrl');</span>
+<span class="comment">%  open(myw)</span>
+<span class="comment">%  view(myw)</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> s4_callback(hObject,eventdata)
+
+ T1=get(s4,<span class="string">'value'</span>);
+ set(sv4,<span class="string">'string'</span>,T1)
+
+ myw.VIFS476.children.appearance.material.transparency=T1
+
+ <span class="keyword">end</span>
+<span class="keyword">function</span> s5_callback(hObject,eventdata)
+
+ T1=get(s5,<span class="string">'value'</span>);
+ set(sv5,<span class="string">'string'</span>,T1)
+ light1.intensity = T1;
+
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> s6_callback(hObject,eventdata)
+
+ T1=get(s6,<span class="string">'value'</span>);
+ set(sv6,<span class="string">'string'</span>,T1)
+ sun1.intensity = T1;
+<span class="comment">%  myw = vrworld('HELICAL GEAR .wrl');</span>
+<span class="comment">%  open(myw)</span>
+<span class="comment">%  view(myw)</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> start_wrl_callback(hObject,eventdata)
+
+ start(t);
+
+<span class="keyword">end</span>
+<span class="keyword">function</span> stop_wrl_callback(hObject,eventdata)
+
+ stop(t);
+
+<span class="keyword">end</span>
+<span class="keyword">function</span> light_wrl_callback(hObject,eventdata)
+
+<span class="keyword">if</span> (flg_light == 0)
+set(f,<span class="string">'Lighting'</span>,<span class="string">'off'</span>)
+flg_light = 1 ;
+<span class="keyword">else</span>
+set(f,<span class="string">'Lighting'</span>,<span class="string">'on'</span>)
+flg_light = 0 ;
+<span class="keyword">end</span>
+
+<span class="keyword">end</span>
+<span class="keyword">function</span> hlight_wrl_callback(hObject,eventdata)
+</pre><pre class="codeinput"><span class="keyword">if</span> (flg_hlight == 0)
+set(f,<span class="string">'Headlight'</span>,<span class="string">'off'</span>)
+flg_hlight = 1 ;
+<span class="keyword">else</span>
+set(f,<span class="string">'Headlight'</span>,<span class="string">'on'</span>)
+flg_hlight = 0 ;
+<span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+
+<span class="keyword">function</span> mytimer_callback(hObject,eventdata)
+
+ tv1 = tv1 + 0.01 ;
+ set(myw,<span class="string">'Time'</span>, tv1);
+<span class="comment">%  vrdrawnow;</span>
+
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="gui1_01.png" alt=""> <img vspace="5" hspace="5" src="gui1_02.png" alt=""> <pre class="codeinput"><span class="keyword">function</span> my_closereq(hObject,eventdata)
+   delete(timerfind)
+   close(myw);
+   delete(myw);
+   delete(gcf);
+ <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function gui1()
+
+global tv1 ;
+tv1 = 0 ;
+
+global flg_light ;
+flg_light = 0 ;
+
+global flg_hlight ;
+flg_hlight = 0 ;
+
+hFig = figure('Toolbar','none','Menubar', 'none',...
+    'Name','gui1','Resize','off','CloseRequestFcn',{@my_closereq},...
+    'Position',[800 400 400 300],'Color',[0.6 0.6 0.6]);
+
+s1 = uicontrol('Style','slider','Callback', {@s1_callback},'FontSize',14,...
+                'Units','normalized','Position',[0.1 0.8 0.5 .08],'Max',15,...
+                'Min',0,'SliderStep',[0.01 0.10]);
+            
+sv1 = uicontrol(gcf,'Style','edit','FontSize',12,'String','',...
+        'Units','normalized','Position',[0.6 0.8 0.2 .09],'BackgroundColor','w');  
+    
+sv1l = uicontrol(gcf,'Style','text','FontSize',12,'String','speed w1',...
+        'Units','normalized','Position',[0.8 0.8 0.2 .09]);    
+               
+s2 = uicontrol('Style','slider','Callback', {@s2_callback},'FontSize',14,...
+                'Units','normalized','Position',[0.1 0.7 0.5 .08],'Max',15,...
+                'Min',0,'SliderStep',[0.01 0.10]);            
+            
+sv2 = uicontrol(gcf,'Style','edit','FontSize',12,'String','',...
+        'Units','normalized','Position',[0.6 0.7 0.2 .09],'BackgroundColor','w'); 
+    
+sv2l = uicontrol(gcf,'Style','text','FontSize',12,'String','speed w2',...
+        'Units','normalized','Position',[0.8 0.7 0.2 .09]);    
+   
+s3 = uicontrol('Style','slider','Callback', {@s3_callback},'FontSize',14,...
+                'Units','normalized','Position',[0.1 0.6 0.5 .08],'Max',10,...
+                'Min',0,'SliderStep',[0.01 0.10]);            
+            
+sv3 = uicontrol(gcf,'Style','edit','FontSize',12,'String','',...
+        'Units','normalized','Position',[0.6 0.6 0.2 .09],'BackgroundColor','w');  
+           
+sv3l = uicontrol(gcf,'Style','text','FontSize',12,'String','',...
+        'Units','normalized','Position',[0.8 0.6 0.2 .09]);     
+    
+s4 = uicontrol('Style','slider','Callback', {@s4_callback},'FontSize',14,...
+                'Units','normalized','Position',[0.1 0.5 0.5 .08],'Max',1,...
+                'Min',0,'SliderStep',[0.01 0.10]);            
+            
+sv4 = uicontrol(gcf,'Style','edit','FontSize',12,'String','',...
+        'Units','normalized','Position',[0.6 0.5 0.2 .09],'BackgroundColor','w'); 
+    
+sv4l = uicontrol(gcf,'Style','text','FontSize',12,'String','transp-cy',...
+        'Units','normalized','Position',[0.8 0.5 0.2 .09]);
+    
+s5 = uicontrol('Style','slider','Callback', {@s5_callback},'FontSize',14,...
+                'Units','normalized','Position',[0.1 0.4 0.5 .08],'Max',10,...
+                'Min',0,'SliderStep',[0.01 0.10]);            
+            
+sv5 = uicontrol(gcf,'Style','edit','FontSize',12,'String','',...
+        'Units','normalized','Position',[0.6 0.4 0.2 .09],'BackgroundColor','w');
+    
+sv5l = uicontrol(gcf,'Style','text','FontSize',12,'String','light int',...
+        'Units','normalized','Position',[0.8 0.4 0.2 .09]);
+    
+   
+s6 = uicontrol('Style','slider','Callback', {@s6_callback},'FontSize',14,...
+                'Units','normalized','Position',[0.1 0.3 0.5 .08],'Max',10,...
+                'Min',0,'SliderStep',[0.01 0.10]);            
+            
+sv6 = uicontrol(gcf,'Style','edit','FontSize',12,'String','',...
+        'Units','normalized','Position',[0.6 0.3 0.2 .09],'BackgroundColor','w');  
+    
+sv6l = uicontrol(gcf,'Style','text','FontSize',12,'String','sun int',...
+        'Units','normalized','Position',[0.8 0.3 0.2 .09]);
+    
+start_wrl = uicontrol('String','start','Callback', {@start_wrl_callback},'FontSize',14,...
+            'Units','normalized','Position',[0.1 0.18 0.15 .1]);
+        
+stop_wrl = uicontrol('String','stop','Callback', {@stop_wrl_callback},'FontSize',14,...
+            'Units','normalized','Position',[0.1 0.06 0.15 .1]);     
+
+light_wrl = uicontrol('String','light','Callback', {@light_wrl_callback},'FontSize',14,...
+            'Units','normalized','Position',[0.3 0.18 0.15 .1]);
+        
+hlight_wrl = uicontrol('String','hlight','Callback', {@hlight_wrl_callback},'FontSize',14,...
+            'Units','normalized','Position',[0.3 0.06 0.15 .1]);  
+        
+t = timer('period',0.02);
+set(t,'ExecutionMode','fixedrate','StartDelay',0.5);
+set(t,'timerfcn',@mytimer_callback);
+% start(t);
+
+myw = vrworld('HELICAL GEAR .wrl');
+open(myw)
+f = vrfigure(myw);
+
+tg41 = vrnode(myw,'group04-TIMER');
+tg51 = vrnode(myw,'group05-TIMER');
+
+light1 = vrnode(myw,'Light');
+sun1   = vrnode(myw,'sun');
+
+axis off; 
+
+% [X> B^ W H]
+function s1_callback(hObject,eventdata)
+    
+ T1=get(s1,'value');
+ set(sv1,'string',15-T1)
+ tg51.cycleInterval = T1;
+
+
+end 
+function s2_callback(hObject,eventdata)
+    
+ T1=get(s2,'value');
+ set(sv2,'string',15-T1)
+ tg41.cycleInterval = T1;
+%  myw = vrworld('HELICAL GEAR .wrl');
+%  open(myw)
+%  view(myw)
+
+
+end 
+function s3_callback(hObject,eventdata)
+    
+ T1=get(s3,'value');
+ set(sv3,'string',T1)
+%  myw = vrworld('HELICAL GEAR .wrl');
+%  open(myw)
+%  view(myw)
+end
+
+function s4_callback(hObject,eventdata)
+    
+ T1=get(s4,'value');
+ set(sv4,'string',T1)
+ 
+ myw.VIFS476.children.appearance.material.transparency=T1
+
+ end
+function s5_callback(hObject,eventdata)
+    
+ T1=get(s5,'value');
+ set(sv5,'string',T1)
+ light1.intensity = T1;
+ 
+end
+
+function s6_callback(hObject,eventdata)
+    
+ T1=get(s6,'value');
+ set(sv6,'string',T1)
+ sun1.intensity = T1;
+%  myw = vrworld('HELICAL GEAR .wrl');
+%  open(myw)
+%  view(myw)
+end
+
+function start_wrl_callback(hObject,eventdata)
+    
+ start(t);
+  
+end    
+function stop_wrl_callback(hObject,eventdata)
+    
+ stop(t);
+  
+end    
+function light_wrl_callback(hObject,eventdata)
+
+if (flg_light == 0)
+set(f,'Lighting','off')
+flg_light = 1 ;
+else
+set(f,'Lighting','on')
+flg_light = 0 ;
+end
+  
+end
+function hlight_wrl_callback(hObject,eventdata)
+
+if (flg_hlight == 0)
+set(f,'Headlight','off')
+flg_hlight = 1 ;
+else
+set(f,'Headlight','on')
+flg_hlight = 0 ;
+end
+    
+
+%%
+
+  
+end    
+
+function mytimer_callback(hObject,eventdata)
+    
+ tv1 = tv1 + 0.01 ;   
+ set(myw,'Time', tv1);
+%  vrdrawnow;
+  
+end    
+        %%
+function my_closereq(hObject,eventdata)
+   delete(timerfind)
+   close(myw); 
+   delete(myw);
+   delete(gcf);
+ end 
+end
+##### SOURCE END #####
+--></body></html>
